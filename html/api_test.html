@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="../css/api.css" />
+<link rel="stylesheet" type="text/css" href="../css/aui.css" />
+<link rel="stylesheet" type="text/css" href="../css/common.css" />
+<style>
+    .outer {
+        position:relative;
+        width: 95%;
+    }
+    .inner {
+        margin-left: 2.52rem;
+        overflow: hidden;
+        overflow-x: auto;
+    }
+    .base-table {
+        position: absolute;/*将第一个表格定位在outer上*/
+        left: 5%;
+        top: 0;
+    }
+    .base-table td{
+        width: 2.0rem;
+    }
+    .target-table td{
+        min-width: 2.0rem;
+    }
+
+
+
+</style>
+</head>
+
+<body>
+
+
+
+    <table id="app" class="tables">
+        <tr v-for="todo in todos">
+            <td>{{ todo.station_name }}</td>
+            <td class="1" v-if="todo.name1">{{ todo.name1 }}</td>
+            <td class="1" v-else>-</td>
+            <td class="2">{{ todo.name2 }}</td>
+        </tr>
+    </table>
+    <div class="outer" >
+        <div class="inner" >
+            <table class="base-table" >
+                <tr>
+                    <td>我是定住的单元格1</td>
+                </tr>
+                <tr>
+                    <td>我是定住的单元格1</td>
+                </tr>
+                <tr>
+                    <td>我是定住的单元格1</td>
+                </tr>
+            </table>
+            <table class="target-table" >
+                <tr>
+                    <td>单元格2</td>
+                    <td>单元格3</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                </tr>
+                <tr>
+                  <td>单元格3</td>
+                  <td>单元格2</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                  <td>单元格4</td>
+                </tr>
+                <tr>
+                    <td>单元格2</td>
+                    <td>单元格3</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                    <td>单元格4</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+<body>
+
+
+
+
+
+
+<script type="text/javascript" src="../script/rem.js"></script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/jquery.js"></script>
+<script type="text/javascript" src="../script/vue.js"></script>
+
+<script type="text/javascript">
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    todos: [{
+        station_name: '站点名',
+        name1: '浊度(NTU)',
+        name2: '盐度(Y)' }],
+    items:''
+  }
+})
+var a = {
+        station_name: '站点名',
+        name1: null,
+        name2: '盐度(Y)' };
+  app.todos.push(a);
+
+  $(function(){//计算平衡两个表格的单元格高度
+        var baseHeightArray = [];
+        var baseTable = $('.base-table');
+        var targetTable = $('.target-table');
+        var targetTr = targetTable.find('tr');
+        baseTable.find('tr').each(function (index, el) {
+            var baseH = $(el).find('td').height();
+            var targetH = targetTr.eq(index).height();
+            var h = baseH > targetH ? baseH : targetH;
+            baseHeightArray.push(h);
+        });
+        baseTable.find('tr').each(function(index, el){
+            $(el).find('td').height(baseHeightArray[index]);
+        });
+        targetTr.each(function(index, el){
+            $(el).find('td').height(baseHeightArray[index]);
+        });
+    })
+    // apiready = function() {
+    //   api.ajax({
+    //       url: 'http://192.168.2.221/app/ModuleData?bind_id=14',
+    //       method: 'post',
+    //   },function(ret, err){
+    //       if (ret) {
+    //           if (ret.success == true) {
+    //
+    //           console.log( JSON.stringify( ret ) );}
+    //       } else {
+    //
+    //           alert( JSON.stringify( err ) );
+    //       }
+    //   });
+    // }
+
+</script>
+</body>
+
+</html>

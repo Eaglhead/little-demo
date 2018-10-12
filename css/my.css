@@ -1,0 +1,22 @@
+.aui-bar-tab-item .no_active {
+    display: block;
+}
+
+.aui-bar-tab-item .active {
+    display: none;
+}
+
+.aui-active .no_active {
+    display: none;
+}
+
+.aui-active .active {
+    display: block !important;
+}
+
+footer img {
+    width: 0.5rem !important;
+    display: block;
+    margin: 0rem auto;
+    height: 0.5rem !important;
+}
